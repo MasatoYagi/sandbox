@@ -16,19 +16,18 @@
 //     const std = @import("std");
 //
 //     // memory allocation can fail, so the return type is !void
-//     pub fn main() !void {
-//
-//         var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);
-//         defer arena.deinit();
-//
-//         const allocator = arena.allocator();
-//
-//         const ptr = try allocator.create(i32);
-//         std.debug.print("ptr={*}\n", .{ptr});
-//
-//         const slice_ptr = try allocator.alloc(f64, 5);
-//         std.debug.print("slice_ptr={*}\n", .{slice_ptr});
-//     }
+// pub fn main() !void {
+//     var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);
+//     defer arena.deinit();
+
+//     const allocator = arena.allocator();
+
+//     const ptr = try allocator.create(i32); // i32型の1つの値を保持するためのメモリを割り当て、そのメモリへのポインタを返す
+//     std.debug.print("ptr={*}\n", .{ptr}); // ptrは割り当てられたi32のメモリ領域を指すポインタ
+
+//     const slice_ptr = try allocator.alloc(f64, 5); // f64型の5つの値を保持するためのメモリを割り当て、そのメモリへのポインタを返す
+//     std.debug.print("slice_ptr={*}\n", .{slice_ptr});
+// }
 
 // Instead of a simple integer or a slice with a constant size,
 // this program requires allocating a slice that is the same size
@@ -64,7 +63,7 @@ pub fn main() !void {
     const allocator = arena.allocator();
 
     // allocate memory for this array
-    const avg: []f64 = ???;
+    const avg: []f64 = try allocator.alloc(f64, arr.len); // f64型のarr.len個の要素を保持するためのメモリを割り当て、そのメモリへのポインタを返す
 
     runningAverage(arr, avg);
     std.debug.print("Running Average: ", .{});
