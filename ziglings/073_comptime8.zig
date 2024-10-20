@@ -37,7 +37,7 @@ pub fn main() void {
     print("My llama value is {}.\n", .{my_llama});
 }
 
-fn getLlama(i: usize) u32 {
+fn getLlama(comptime i: usize) u32 { // comptimeがないと、iがコンパイル時にわからない（ランタイム時に決定される）ためエラーになる
     // We've put a guard assert() at the top of this function to
     // prevent mistakes. The 'comptime' keyword here means that
     // the mistake will be caught when we compile!
