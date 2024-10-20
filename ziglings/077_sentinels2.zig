@@ -37,7 +37,7 @@
 const print = @import("std").debug.print;
 
 const WeirdContainer = struct {
-    data: [*]const u8,
+    data: [*]const u8, // 長さが不明なu8の配列のポインタ
     length: usize,
 };
 
@@ -60,7 +60,7 @@ pub fn main() void {
     // length... You've actually solved this problem before!
     //
     // Here's a big hint: do you remember how to take a slice?
-    const printable = ???;
+    const printable = foo.data[0..foo.length]; // 長さが分かっているのでスライスできる
 
     print("{s}\n", .{printable});
 }

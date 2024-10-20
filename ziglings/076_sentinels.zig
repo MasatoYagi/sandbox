@@ -51,6 +51,7 @@ pub fn main() void {
     // For fun, let's replace the value at position 3 with the
     // sentinel value 0. This seems kind of naughty.
     nums[3] = 0;
+    // nums[5] = 1; // 最後の要素を0以外にしても配列は正しくループする。
 
     // So now we have a zero-terminated array and a many-item
     // pointer that reference the same data: a sequence of
@@ -82,19 +83,19 @@ fn printSequence(my_seq: anytype) void {
             print("Array:", .{});
 
             // Loop through the items in my_seq.
-            for (???) |s| {
+            for (my_seq) |s| { // 配列は長さがわかっているのでfor文で最後まで回せる
                 print("{}", .{s});
             }
         },
         .pointer => {
             // Check this out - it's pretty cool:
-            const my_sentinel = sentinel(@TypeOf(my_seq));
+            const my_sentinel = sentinel(@TypeOf(my_seq)); // sentinel() is a function that returns the sentinel value for a given type.
             print("Many-item pointer:", .{});
 
             // Loop through the items in my_seq until we hit the
             // sentinel value.
             var i: usize = 0;
-            while (??? != my_sentinel) {
+            while (my_seq[i] != my_sentinel) { // 多項目ポインタは最初のセンチネル値で止まる(ポインタだと長さがわからない)
                 print("{}", .{my_seq[i]});
                 i += 1;
             }
