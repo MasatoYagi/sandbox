@@ -1,4 +1,4 @@
-//
+// printの.{}の部分は匿名構造体
 // An anonymous struct value LITERAL (not to be confused with a
 // struct TYPE) uses '.{}' syntax:
 //
@@ -38,7 +38,7 @@ pub fn main() void {
 
 // Please complete this function which prints an anonymous struct
 // representing a circle.
-fn printCircle(???) void {
+fn printCircle(circle: anytype) void {
     print("x:{} y:{} radius:{}\n", .{
         circle.center_x,
         circle.center_y,
