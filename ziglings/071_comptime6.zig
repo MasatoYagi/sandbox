@@ -1,4 +1,4 @@
-//
+// インラインfor文を使ってコンパイル時にfor文を展開する
 // There have been several instances where it would have been
 // nice to use loops in our programs, but we couldn't because the
 // things we were trying to do could only be done at compile
@@ -11,7 +11,7 @@
 // like those mentioned above where a regular runtime 'for' loop
 // wouldn't be allowed:
 //
-//     inline for (.{ u8, u16, u32, u64 }) |T| {
+//     inline for (.{ u8, u16, u32, u64 }) |T| { // コンパイル時にfor文が展開される（冗長に手動で書く必要がない）
 //         print("{} ", .{@typeInfo(T).Int.bits});
 //     }
 //
