@@ -39,7 +39,7 @@
 
 const std = @import("std");
 
-fn runningAverage(arr: []const f64, avg: []f64) void {
+fn runningAverage(comptime arr: []const f64, avg: []f64) void {
     var sum: f64 = 0;
 
     for (0.., arr) |index, val| {
@@ -53,16 +53,16 @@ pub fn main() !void {
     // pretend this was defined by reading in user input
     const arr: []const f64 = &[_]f64{ 0.3, 0.2, 0.1, 0.1, 0.4 };
 
-    // initialize the allocator
+    // initialize the allocator (アリーナアロケータを初期化)
     var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);
 
-    // free the memory on exit
+    // free the memory on exit (関数終了時にメモリを解放)
     defer arena.deinit();
 
-    // initialize the allocator
+    // initialize the allocator (アロケータを初期化)
     const allocator = arena.allocator();
 
-    // allocate memory for this array
+    // allocate memory for this array (アリーナアロケータを使用して配列にメモリを割り当て)
     const avg: []f64 = try allocator.alloc(f64, arr.len); // f64型のarr.len個の要素を保持するためのメモリを割り当て、そのメモリへのポインタを返す
 
     runningAverage(arr, avg);
